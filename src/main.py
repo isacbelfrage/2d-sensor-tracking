@@ -1,3 +1,4 @@
+import math
 from src.model import MovingObject
 from src.sensor import PositionSensor
 
@@ -9,24 +10,39 @@ def main() -> None:
     obj = MovingObject(0, 0, 2, 1)
     real_positions: list[tuple[float, float]] = []
     estimated_positions: list[tuple[float, float]] = []
+    sensor_1_positions: list[tuple[float, float]] = []
+    sensor_error = 0.0
+    estimation_error = 0.0
 
     for _ in range(100):
         obj.update(0.1)
-        real_positions.append((obj.x, obj.y))
+        real_position = (obj.x, obj.y)
+        real_positions.append(real_position)
+        sensor_1_reading = sensor_1.measure(obj.x, obj.y)
+        sensor_2_reading = sensor_2.measure(obj.x, obj.y)
+        sensor_3_reading = sensor_3.measure(obj.x, obj.y)
+        sensor_readings = [sensor_1_reading, sensor_2_reading, sensor_3_reading]
         sum_x = 0.0
         sum_y = 0.0
-        sensor_readings = [sensor_1.measure(obj.x, obj.y), 
-                           sensor_2.measure(obj.x, obj.y), 
-                           sensor_3.measure(obj.x, obj.y)]
         for reading in sensor_readings:
             sum_x += reading[0]
             sum_y += reading[1]
-        estimated_pos = (sum_x / len(sensor_readings), sum_y / len(sensor_readings))
-        estimated_positions.append(estimated_pos)
+        estimated_reading = (sum_x / len(sensor_readings), sum_y / len(sensor_readings))
+        estimated_positions.append(estimated_reading)
+        sensor_1_positions.append(sensor_1_reading)
 
-    print(real_positions[99])
-    print(estimated_positions[99])
+        sensor_difference = (real_position[0] - sensor_1_reading[0], 
+                             real_position[1] - sensor_1_reading[1])
+        estimation_difference = (real_position[0] - estimated_reading[0], 
+                                 real_position[1] - estimated_reading[1])
+        sensor_error += math.sqrt(math.pow(sensor_difference[0], 2) + 
+                                                 math.pow(sensor_difference[1], 2))
+        estimation_error += math.sqrt(math.pow(estimation_difference[0], 2) + 
+                                                         math.pow(estimation_difference[1], 2))
 
+
+    print("Mean sensor error:", sensor_error / len(real_positions))
+    print("Mean estimation error:", estimation_error / len(real_positions))
 
 if __name__ == "__main__":
     main()
