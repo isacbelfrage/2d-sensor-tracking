@@ -2,11 +2,13 @@ import math
 
 
 def calculate_mean_position(readings: list[tuple[float, float]]) -> tuple[float, float]:
+    if (len(readings) == 0):
+           raise(ValueError("List can't be empty"))
     sum_x = 0
     sum_y = 0
     for reading in readings:
-                sum_x += reading[0]
-                sum_y += reading[1]
+            sum_x += reading[0]
+            sum_y += reading[1]
     return (sum_x / len(readings), sum_y / len(readings))
 
 def calculate_position_error(real_position: tuple[float, float], measured_position: tuple[float, float]) -> float:

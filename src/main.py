@@ -1,5 +1,4 @@
-import matplotlib.pyplot as plt
-from src.tracking import *
+from src.tracking import calculate_mean_position, calculate_position_error
 from src.model import MovingObject
 from src.sensor import PositionSensor
 
@@ -12,8 +11,8 @@ def main() -> None:
     real_positions: list[tuple[float, float]] = []
     estimated_positions: list[tuple[float, float]] = []
     sensor_1_positions: list[tuple[float, float]] = []
-    sensor_error = 0.0
-    estimation_error = 0.0
+    total_sensor_error = 0.0
+    total_estimation_error = 0.0
 
     for _ in range(100):
         obj.update(0.1)
@@ -26,11 +25,11 @@ def main() -> None:
         estimated_reading = calculate_mean_position(sensor_readings)
         estimated_positions.append(estimated_reading)
         sensor_1_positions.append(sensor_1_reading)        
-        sensor_error += calculate_position_error(real_position, sensor_1_reading)
-        estimation_error += calculate_position_error(real_position, estimated_reading)
+        total_sensor_error += calculate_position_error(real_position, sensor_1_reading)
+        total_estimation_error += calculate_position_error(real_position, estimated_reading)
 
-    print("Mean sensor error:", sensor_error / len(real_positions))
-    print("Mean estimation error:", estimation_error / len(real_positions))
+    print("Mean sensor error:", total_sensor_error / len(real_positions))
+    print("Mean estimation error:", total_estimation_error / len(real_positions))
       
 
 if __name__ == "__main__":

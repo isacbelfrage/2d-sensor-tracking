@@ -3,10 +3,18 @@ from src.tracking import *
 
 
 class TestTracking(unittest.TestCase):
+    def test_calculate_mean_position_with_empty_list(self):
+        # Arrange
+        empty_list = []
+
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            calculate_mean_position(empty_list)
     def test_calculate_mean_position(self):
         # Arrange
         same_positions = [(2, 2), (2, 2), (2, 2)]
         different_positions = [(1, 2), (2, 1), (0, 3)]
+
         # Act & Assert
         self.assertEqual(calculate_mean_position(same_positions), (2, 2))
         self.assertEqual(calculate_mean_position(different_positions), (1, 2))
