@@ -1,5 +1,4 @@
 import unittest
-
 from src.model import MovingObject
 
 class TestMovingObject(unittest.TestCase):
