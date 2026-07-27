@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 from src.tracking import calculate_mean_position, calculate_position_error
 from src.visualization import plot_positions
 from src.model import MovingObject
