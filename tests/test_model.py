@@ -3,7 +3,7 @@ from src.model import MovingObject
 
 
 class TestMovingObject(unittest.TestCase):
-    def test_update_changes_position(self):
+    def test_update_applies_velocity_over_time(self):
         # Arrange
         obj = MovingObject(0.0, 0.0, 2.0, 1.0)
 

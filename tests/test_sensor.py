@@ -4,7 +4,7 @@ from src.sensor import PositionSensor
 
 
 class TestPositionSensor(unittest.TestCase):
-    def test_measure_without_noise(self):
+    def test_zero_noise_returns_exact_position(self):
         # Arrange
         sensor = PositionSensor(0)
 
@@ -14,13 +14,13 @@ class TestPositionSensor(unittest.TestCase):
         # Assert
         self.assertEqual(measured_pos, (3.0, 4.0))
 
-    def test_rejects_negative_noise(self):
+    def test_negative_noise_is_rejected(self):
         # Act & Assert 
         with self.assertRaises(ValueError):
             PositionSensor(-1)
 
     @patch("src.sensor.random.gauss")
-    def test_measure_adds_noise_to_coordinates(self, mock_gauss):
+    def test_noise_is_added_to_both_coordinates(self, mock_gauss):
         sensor = PositionSensor(2)
         mock_gauss.side_effect = [0.5, -0.25]
         measured_pos = sensor.measure(3.0, 4.0)

@@ -1,8 +1,8 @@
 import unittest
 from src.visualization import split_positions
 
-class TestTracking(unittest.TestCase):
-    def test_split_positions(self):
+class TestVisualization(unittest.TestCase):
+    def test_split_positions_separates_coordinates(self):
         # Arrange
         positions = [(1, 2), (2, 2), (2, 1)]
 
