@@ -1,6 +1,7 @@
 import unittest
 from src.model import MovingObject
 
+
 class TestMovingObject(unittest.TestCase):
     def test_update_changes_position(self):
         # Arrange
