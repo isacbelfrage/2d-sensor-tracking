@@ -2,20 +2,25 @@ import matplotlib.pyplot as plt
 
 
 def plot_positions(real_positions: list[tuple[float, float]],
-                   sensor_positions: list[tuple[float, float]],
-                   estimated_positions: list[tuple[float, float]]) -> None:
+                   sensor_readings: list[tuple[float, float]],
+                   mean_estimates: list[tuple[float, float]],
+                   weighted_mean_estimates: list[tuple[float, float]]) -> None:
     real_x, real_y = split_positions(real_positions)
-    sensor_x, sensor_y = split_positions(sensor_positions)
-    estimated_x, estimated_y = split_positions(estimated_positions)
+    sensor_x, sensor_y = split_positions(sensor_readings)
+    mean_x, mean_y = split_positions(mean_estimates)
+    weighted_mean_x, weighted_mean_y = split_positions(weighted_mean_estimates)
 
-    plt.plot(real_x, real_y,label="Real")
-    plt.scatter(sensor_x, sensor_y, label="Sensor 1", alpha=0.6)
-    plt.scatter(estimated_x, estimated_y, label="Estimated", alpha=0.6)
+    plt.plot(real_x, real_y, label="Real")
+    plt.scatter(sensor_x, sensor_y, label="Sensor 1", marker="o", alpha=0.6)
+    plt.scatter(mean_x, mean_y, label="Mean estimate", marker="x", alpha=0.6)
+    plt.scatter(weighted_mean_x, weighted_mean_y, label="Weighted mean estimate", marker="s", alpha=0.6)
     
     plt.legend()
     plt.ylabel("y-axis")
     plt.xlabel("x-axis")
     plt.title("Tracking")
+    plt.axis("equal")
+
     plt.show()
 
 
