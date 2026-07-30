@@ -15,14 +15,14 @@ def calculate_mean_position(positions: list[tuple[float, float]]) -> tuple[float
 def calculate_weighted_mean_position(positions: list[tuple[float, float]], weights: list[float]) -> tuple[float, float]:
     sum_weights = sum(weights)
     if len(positions) == 0:
-        raise(ValueError("List can't be empty"))
+        raise ValueError("List can't be empty")
     if len(weights) != len(positions):
-        raise(ValueError("Lists have to be same size"))
+        raise ValueError("Lists have to be same size")
     if sum_weights == 0:
-        raise(ValueError("Sum of weights must be non-zero"))
+        raise ValueError("Sum of weights must be non-zero")
     for weight in weights:
         if weight < 0:
-            raise(ValueError("Weights must be non-negative"))
+            raise ValueError("Weights must be non-negative")
     sum_x = 0.0
     sum_y = 0.0
     for i in range(len(positions)):

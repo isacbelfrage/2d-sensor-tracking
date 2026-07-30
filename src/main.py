@@ -1,5 +1,3 @@
-import math
-
 from src.tracking import calculate_mean_position, calculate_position_error, calculate_weighted_mean_position
 from src.visualization import plot_positions
 from src.model import MovingObject
