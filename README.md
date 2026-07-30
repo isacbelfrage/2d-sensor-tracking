@@ -2,13 +2,16 @@
 
 This is a learning project focused on implementing a system that tracks a moving object, such as a boat or drone, based on noisy sensor data. In later versions, the project will grow into a distributed system. 
 
-Version 1 currently includes:
+Version 1 included:
 - A model of an object moving at constant speed and direction.
-- Three noisy positon sensors
+- Three noisy position sensors
 - Mean position estimation
 - Error comparison
 - Unit tests
 - Visualization of real, measured and estimated positions
+
+Version 2 currently includes, in addition to this:
+- Weighted estimate and comparison between weighted and unweighted mean.
 
 ## Create environment
 
