@@ -64,6 +64,23 @@ class TestTracking(unittest.TestCase):
         # Act & Assert
         self.assertEqual(calculate_weighted_mean_position(positions, weights), (2.5, 6.25))
 
+    def test_weighted_mean_with_same_weights(self):
+        # Arrange
+        positions = [(0, 5), (10, 10)]
+        weights = [2, 2]
+
+        # Act & Assert
+        self.assertEqual(calculate_weighted_mean_position(positions, weights), calculate_mean_position(positions))
+
+    def test_weighted_mean_with_zero_weighting(self):
+        # Arrange
+        positions = [(0, 5), (5, 7), (10, 10)]
+        weights = (3, 0, 1)
+
+        # Act & Assert
+        self.assertEqual(calculate_weighted_mean_position(positions, weights), (2.5, 6.25))
+
+
     def test_position_error_calculates_euclidean_distance(self):
         # Arrange
         position_1 = (0, 0)
