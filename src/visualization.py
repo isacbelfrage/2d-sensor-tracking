@@ -11,7 +11,7 @@ def plot_positions(real_positions: list[tuple[float, float]],
     weighted_mean_x, weighted_mean_y = split_positions(weighted_mean_estimates)
 
     plt.plot(real_x, real_y, label="Real")
-    plt.scatter(sensor_x, sensor_y, label="Sensor 1", marker="o", alpha=0.6)
+    plt.scatter(sensor_x, sensor_y, label="Individual sensor", marker="o", alpha=0.6)
     plt.scatter(mean_x, mean_y, label="Mean estimate", marker="x", alpha=0.6)
     plt.scatter(weighted_mean_x, weighted_mean_y, label="Weighted mean estimate", marker="s", alpha=0.6)
     
