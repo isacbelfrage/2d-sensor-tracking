@@ -1,11 +1,11 @@
 ## Alpha-Beta Filter Parameter Experiment
 
-dt = 0.1
-nbr of steps: 100
-noise_std = 1, 3, 5
-velocity of object (2, 1)
-initial velocity for filter = (0, 0)
-the first weighted mean estimation is used as initial position
+- dt = 0.1
+- nbr of steps: 100
+- noise_std = 1, 3, 5
+- velocity of object (2, 1)
+- initial velocity for filter = (0, 0)
+- the first weighted mean estimation is used as initial position
 
 
 Random seed: `42`
