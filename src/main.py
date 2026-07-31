@@ -1,3 +1,4 @@
+import random
 from src.tracking import calculate_mean_position, calculate_position_error, calculate_weighted_mean_position
 from src.visualization import plot_positions
 from src.model import MovingObject
@@ -10,14 +11,14 @@ def main() -> None:
     weights = [1 / sensor.noise_std**2 for sensor in sensors]
     obj = MovingObject(0, 0, 2, 1)
     alpha_beta_filter = None
-    alpha = 0.8
-    beta = 0.2
+    alpha = 0.4
+    beta = 0.05
+    dt = 0.1
     real_positions: list[tuple[float, float]] = []
     mean_estimates: list[tuple[float, float]] = []
     weighted_mean_estimates: list[tuple[float, float]] = []
     individual_sensor_readings: list[tuple[float, float]] = []
     alpha_beta_filter_estimates: list[tuple[float, float]] = []
-    dt = 0.1
     total_sensor_error = 0.0
     total_mean_error = 0.0
     total_weighted_mean_error = 0.0
@@ -46,10 +47,22 @@ def main() -> None:
         total_weighted_mean_error += calculate_position_error(real_position, weighted_mean_estimate)
         total_alpha_beta_filter_error += calculate_position_error(real_position, filtered_position)
 
-    print("Mean sensor error:", total_sensor_error / len(real_positions))
-    print("Mean unweighted estimate error:", total_mean_error / len(real_positions))
-    print("Mean weighted estimate error:", total_weighted_mean_error / len(real_positions))
-    print("Alpha-beta filter mean error:", total_alpha_beta_filter_error / len(real_positions))
+    number_of_positions = len(real_positions)
+    mean_sensor_error = total_sensor_error / number_of_positions
+    mean_unweighted_error = total_mean_error / number_of_positions
+    mean_weighted_error = total_weighted_mean_error / number_of_positions
+    mean_alpha_beta_error = total_alpha_beta_filter_error / number_of_positions
+
+    improvement = (
+        (mean_weighted_error - mean_alpha_beta_error)
+        / mean_weighted_error
+    ) * 100
+
+    print(f"Mean sensor error: {mean_sensor_error:.3f}")
+    print(f"Mean unweighted estimate error: {mean_unweighted_error:.3f}")
+    print(f"Mean weighted estimate error: {mean_weighted_error:.3f}")
+    print(f"Alpha-beta filter mean error: {mean_alpha_beta_error:.3f}")
+    print(f"Improvement over weighted estimate: {improvement:.1f}%")
     plot_positions(real_positions, individual_sensor_readings, mean_estimates, weighted_mean_estimates, alpha_beta_filter_estimates)
 
 
