@@ -4,7 +4,7 @@ class MovingObject:
         self.y = y
         self.vx = vx
         self.vy = vy
-
+    
     def update(self, dt: float) -> None:
         self.x = self.x + self.vx * dt
         self.y = self.y + self.vy * dt
