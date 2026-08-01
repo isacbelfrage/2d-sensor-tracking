@@ -11,7 +11,11 @@ Version 1 included:
 - Visualization of real, measured and estimated positions
 
 Version 2 currently includes, in addition to this:
-- Weighted estimate and comparison between weighted and unweighted mean.
+- inverse-variance weighted estimation,
+- alpha-beta filtration,
+- Kalman filtration,
+- comparisons of mean position error,
+- reproducable experiments with different random seeds.
 
 ## Create environment
 
